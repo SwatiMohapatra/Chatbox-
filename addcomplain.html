@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add Complain</title>
+  </head>
+  <body>
+  <form action="{% url 'add_complain' %}"  method="POST">
+    {% csrf_token %}
+    <label>Select your Category: &nbsp </label>
+    <select id="sel1" name="category_selection" onchange="giveSelection(this.value)">
+    <option value="infrastructure">Infrastructure</option>
+    <option value="office">Administration Office</option>
+    <option value="staff">Committee/Teaching Staff</option>
+    <option value="management">Management Activities</option>
+    <option value="exam">Exam Section</option>
+    <option value="other">Other</option>
+  </select> <p></p>
+
+      <label>Select your Sub-Category: &nbsp </label>
+      <select name="sub_category_selection" id="sel2">
+      <!-- subcategory for infrastructure -->
+      <option data-option="infrastructure" value="library">Library</option>
+      <option data-option="infrastructure" value="parking">Parking Section</option>
+      <option data-option="infrastructure" value="canteen">Canteen</option>
+      <option data-option="infrastructure" value="playground">Playground</option>
+      <option data-option="infrastructure" value="labs">Labs</option>
+      <option data-option="infrastructure" value="lifts">Lifts</option>
+      <option data-option="infrastructure" value="workshop">Workshop</option>
+      <option data-option="infrastructure" value="classrooms">Classrooms</option>
+      <option data-option="infrastructure" value="xerox">Xerox Office</option>
+      <option data-option="infrastructure" value="washroom">Washrooms</option>
+      <option data-option="infrastructure" value="drink">Drinking System</option>
+      <option data-option="infrastructure" value="campus">Campus</option>
+      <option data-option="infrastructure" value="other">Other</option>
+
+      <!-- subcategory for exam section -->
+
+      <option value="incorrect" data-option="exam">Incorrect Checking</option>
+      <option value="error" data-option="exam">Error in Result</option>
+      <option value="other" data-option="exam">Other</option>
+
+      <!-- subcategory for Admin Office -->
+
+      <option data-option="office" value="admission">Admission</option>
+      <option data-option="office" value="concession">Concession Form</option>
+      <option data-option="office" value="scholarship">Scholarship</option>
+      <option data-option="office" value="other">Other</option>
+
+      <!-- subcategory for management  -->
+
+      <option data-option="management" value="timing">College Timing</option>
+      <option data-option="management" value="tt">Changes in Timetable</option>
+      <option data-option="management" value="fests">Fest and other programs</option>
+      <option data-option="management" value="other">Other</option>
+
+       <!-- subcategory for staff  -->
+
+       <option data-option="staff" value="other">complaint regarding Teacher</option>
+       <option data-option="staff" value="other">Branch Committees</option>
+       <option data-option="staff" value="other">Other</option>
+
+       <!-- subcategory for other  -->
+       <option value="other" data-option="other">Other</option>
+    </select> <p></p>
+
+  <label for="subject">Subject : &nbsp</label>
+  <textarea for="subject" name="subject" rows="2" cols="80" placeholder="Enter Your Subject"></textarea><br><p></p>
+  <label>Type Your Complaint Here: &nbsp </label> <textarea name="complain_field" rows="8" cols="80" placeholder="Start Typing Here"></textarea> <p></p>
+  <input type="submit" name="" value="Submit">
+
+  </form>
+
+    <script>
+      var sel1 = document.querySelector('#sel1');
+      var sel2 = document.querySelector('#sel2');
+      var options2 = sel2.querySelectorAll('option');
+
+      function giveSelection(selValue) {
+        sel2.innerHTML = '';
+        for(var i = 0; i < options2.length; i++) {
+          if(options2[i].dataset.option === selValue) {
+            sel2.appendChild(options2[i]);
+          } } }
+    </script>
+  </body>
+</html>

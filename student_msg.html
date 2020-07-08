@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <style>
+      .msgbox, .nomsg{
+        border: 3px red solid;
+        width: 40%;
+        height: 400px;
+        margin: 50px 50px;
+        overflow: scroll;
+        background-color: #eda39d;
+      }
+    </style>
+    <form action="{% url 'msg_from_member' %}" method="post">
+      {% csrf_token %}
+      {% if msg and oc %}
+      <div class="msgbox">
+        <label><h3>Message from Committee</h3></labels><p></p>
+          {% for i in list %}
+
+              <input type="text" value="{{ msg.membmsg[i] }}" style="width: 100px; background-color: #a84ce0; margin-left: 30px; border-radius: 7px;" disabled> <p></p>
+              <input type="text" value="{{ studmsg[i].studmsg }}" style="width: 90px; margin-left: 190px; border-radius: 7px; background-color: #c5dede; margin-left: 40px;" disabled> <p></p>
+
+          {% endfor %}
+            <input type="text" name="msgfromstudent" placeholder="Type Here" required> <p></p>
+            <input type="submit" name="" value="Send">
+        </div>
+      {% elif msg and not oc %}
+      <div class="msgbox">
+        <label>Message from Committee</label>
+          {% for i in msg %}
+            <input type="text" value="{{ i.membmsg }}" style="width: 100px; background-color: #a84ce0; border-radius: 7px; margin-left: 50px;" disabled> <p></p>
+          {% endfor %}
+        </div>
+      {% elif not msg %}
+        <div class="nomsg">
+          <h3>No Message Received </h3>
+        </div>
+      {% endif %}
+      <!-- {% if msg %}
+      <div class="msgbox">
+        <label>Message from committee</label> <p></p>
+        <input type="text" value="{{ msg }}"  disabled> <p></p>
+        <input type="text" name="msgfromstudent" placeholder="Type Here"> <p></p>
+        <input type="submit" name="" value="Send">
+
+      </div>
+      {% else %}
+      <div class="nomsg">
+        <h3>No Message Received </h3>
+      </div>
+      {% endif %} -->
+    </form>
+  </body>
+</html>

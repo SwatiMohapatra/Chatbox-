@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <style>
+      .msgbox {
+        border: 3px blue solid;
+        width: 40%;
+        height: 500px;
+        margin: 50px 50px;
+        overflow: scroll;
+        background-color: #9cf0de;
+      }
+    </style>
+    <form action="{% url  "done" %}" method="post">
+      {% csrf_token %}
+      {% if message %}
+      <div class="msgbox" style="overflow: scroll;">
+        <label><h3>Message from Student: &nbsp</h3> </label> <p></p>
+      {% for i in message %}
+        {% for j in member %}
+          <input type="text" value="{{ j.membmsg }}" style="background-color: #c1dede; margin-left: 190px; border-radius: 7px;"> <p></p>
+          <input type="text" value="{{ i.studmsg }}" style="background-color: #366cf5; margin-left: 30px; border-radius: 7px; " disabled> <p></p>
+        {% endfor %}
+      {% endfor %}
+        <select name="openclose" style="display: none;">
+          <option value="open">open</option>
+        </select>
+        <input type="text" name="msg_from_member" placeholder="Reply Here" style="width: 100px;" required> <p></p>
+        <input type="submit" name="" value="Send">
+      </div>
+      {% else %}
+      <div class="msgbox">
+          <label>Add Message to the Student: &nbsp </label> <p></p>
+        <input type="text" name="msg_from_member" placeholder="Type Here" required> <p></p>
+        <select class="openclose" name="openclose">
+          <option value="open">Allow Student to Reply</option>
+          <option value="close">Student can't Reply</option>
+        </select>
+        <input type="submit" name="" value="Send">
+      </div>
+      {% endif %}
+    </form>
+
+  </body>
+</html>
