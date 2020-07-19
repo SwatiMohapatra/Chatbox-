@@ -1,8 +1,12 @@
-from django.urls import path,include
-from complain import views
+from django.urls import path, include
+from django.contrib import admin
+from chat.views import *
 
-urlpatterns = [
-    path('', views.add_complain, name="add_complain" ),
-    path("done/", views.done, name="done"),
-    path("msg/", views.member_msg, name="msg_from_member")
+urlpatterns=[
+    path('', chatbox, name="chatbox"),
+    path('search/', chatsearch, name="chatsearch"),
+    path('<str:id>/', chatpage, name="chatpage"),
+    path('allstudent/', allstudent, name="allstudent"),
+    path('studchatbox/', studchatbox, name='studchatbox'),
+    path('<str:id>/student/', studchatpage, name='studchatpage')
 ]
